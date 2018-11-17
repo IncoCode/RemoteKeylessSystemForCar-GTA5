@@ -65,7 +65,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controller\VehicleSmartLockController.cs" />
     <Compile Include="Model\VehicleSmartLock.cs" />
+    <Compile Include="Model\VehicleSmartLockProperties.cs" />
     <Compile Include="RemoteKeylessSystem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

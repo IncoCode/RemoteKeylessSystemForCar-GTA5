@@ -7,33 +7,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using RemoteKeylessSystemForCar.Model;
+using RemoteKeylessSystemForCar.Controller;
 
 namespace RemoteKeylessSystemForCar
 {
     public class RemoteKeylessSystem : Script
     {
-        private VehicleSmartLock vl;
+        private readonly VehicleSmartLockController _smartLockController;
 
         public RemoteKeylessSystem()
         {
             this.Tick += this.RemoteKeylessSystem_Tick;
             this.KeyDown += this.RemoteKeylessSystem_KeyDown;
 
-            this.vl = new VehicleSmartLock(Game.Player.Character.LastVehicle);
+            this._smartLockController = new VehicleSmartLockController();
         }
 
         private void RemoteKeylessSystem_Tick(object sender, EventArgs e)
         {
-            //Vehicle lastVehicle = Game.Player.Character.LastVehicle;
-            //if (!lastVehicle.IsInRangeOf(Game.Player.Character.Position, 6f))
-            //{
-            //    if (lastVehicle.LockStatus == VehicleLockStatus.Locked)
-            //    {
-            //        return;
-            //    }
-            //    lastVehicle.LockStatus = VehicleLockStatus.Locked;
-            //    UI.ShowSubtitle("Vehicle auto locked");
-            //}
+            this._smartLockController.Tick();
         }
 
         private void RemoteKeylessSystem_KeyDown(object sender, KeyEventArgs e)
@@ -49,7 +41,9 @@ namespace RemoteKeylessSystemForCar
                     return;
                 }
 
-                currentVehicle.HasAlarm = true;
+                var properties = new VehicleSmartLockProperties();
+                this._smartLockController.AddVehicle(currentVehicle, properties);
+                
                 UI.ShowSubtitle("Alarm has been set up");
             }
             else if (e.KeyCode == Keys.K)
@@ -59,8 +53,6 @@ namespace RemoteKeylessSystemForCar
                     return;
                 }
 
-                //lastVehicle.LockStatus = VehicleLockStatus.Locked;
-                vl.Lock();
                 UI.ShowSubtitle("Vehicle locked");
             }
             else if (e.KeyCode == Keys.O)
@@ -70,8 +62,6 @@ namespace RemoteKeylessSystemForCar
                     return;
                 }
 
-                //lastVehicle.LockStatus = VehicleLockStatus.Unlocked;
-                vl.Unlock();
                 UI.ShowSubtitle("Vehicle unlocked");
             }
 #endif
