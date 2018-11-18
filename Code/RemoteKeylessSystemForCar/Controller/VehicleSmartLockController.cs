@@ -52,5 +52,10 @@ namespace RemoteKeylessSystemForCar.Controller
                 }
             }
         }
+
+        public bool IsSmartLockInstalled(Vehicle vehicle)
+        {
+            return this._smartLocks.ContainsKey(vehicle.Handle);
+        }
     }
 }

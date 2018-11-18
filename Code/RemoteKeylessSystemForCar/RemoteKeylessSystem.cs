@@ -14,6 +14,7 @@ namespace RemoteKeylessSystemForCar
     public class RemoteKeylessSystem : Script
     {
         private readonly VehicleSmartLockController _smartLockController;
+        private readonly MenuController _menuController;
 
         public RemoteKeylessSystem()
         {
@@ -21,11 +22,13 @@ namespace RemoteKeylessSystemForCar
             this.KeyDown += this.RemoteKeylessSystem_KeyDown;
 
             this._smartLockController = new VehicleSmartLockController();
+            this._menuController = new MenuController(this._smartLockController);
         }
 
         private void RemoteKeylessSystem_Tick(object sender, EventArgs e)
         {
             this._smartLockController.Tick();
+            this._menuController.Tick();
         }
 
         private void RemoteKeylessSystem_KeyDown(object sender, KeyEventArgs e)
@@ -41,10 +44,11 @@ namespace RemoteKeylessSystemForCar
                     return;
                 }
 
-                var properties = new VehicleSmartLockProperties();
-                this._smartLockController.AddVehicle(currentVehicle, properties);
-                
-                UI.ShowSubtitle("Alarm has been set up");
+                //var properties = new VehicleSmartLockProperties();
+                //this._smartLockController.AddVehicle(currentVehicle, properties);
+
+                //UI.ShowSubtitle("Alarm has been set up");
+                this._menuController.ShowMenu(currentVehicle);
             }
             else if (e.KeyCode == Keys.K)
             {
