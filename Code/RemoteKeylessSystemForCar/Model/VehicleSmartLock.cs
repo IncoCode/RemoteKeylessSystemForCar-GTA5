@@ -1,9 +1,6 @@
 ﻿using GTA;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RemoteKeylessSystemForCar.Model
 {
@@ -33,7 +30,7 @@ namespace RemoteKeylessSystemForCar.Model
 
         #endregion
 
-        public VehicleSmartLock(Vehicle vehicle, VehicleSmartLockProperties properties)
+        public VehicleSmartLock( Vehicle vehicle, VehicleSmartLockProperties properties )
         {
             this._vehicle = vehicle;
             this._properties = properties;
@@ -42,7 +39,7 @@ namespace RemoteKeylessSystemForCar.Model
 
         private void CloseAllDoors()
         {
-            foreach ( VehicleDoor door in this._vehicle.Doors)
+            foreach ( VehicleDoor door in this._vehicle.Doors )
             {
                 door.Close();
             }
@@ -50,16 +47,12 @@ namespace RemoteKeylessSystemForCar.Model
 
         private void CloseAllWindows()
         {
-            // ToDo: implement
-            //foreach (VehicleWindow window in this._vehicle.Windows )
-            //{
-            //    this._vehicle.RollUpWindow(window);
-            //}
+            
         }
 
         public void Lock()
         {
-            if (this._isLocked)
+            if ( this._isLocked )
             {
                 return;
             }
@@ -68,42 +61,42 @@ namespace RemoteKeylessSystemForCar.Model
 
             this._vehicle.LockStatus = VehicleLockStatus.Locked;
 
-            if (this._properties.IsCloseAllDorsOnLock)
+            if ( this._properties.IsCloseAllDorsOnLock )
             {
                 this.CloseAllDoors();
             }
-            if (this._properties.IsCloseAllWindowsOnLock)
+            if ( this._properties.IsCloseAllWindowsOnLock )
             {
                 this.CloseAllWindows();
             }
 
-            this._vehicle.SoundHorn(300);
+            this._vehicle.SoundHorn( 300 );
             this._vehicle.AreLightsOn = true;
-            Script.Wait(300);
+            Script.Wait( 300 );
             this._vehicle.AreLightsOn = false;
             this._vehicle.IsEngineRunning = false;
         }
 
         public void Unlock()
         {
-            if (!this._isLocked)
+            if ( !this._isLocked )
             {
                 return;
             }
 
             this._vehicle.LockStatus = VehicleLockStatus.Unlocked;
-            for (int i = 0; i < 2; i++)
+            for ( int i = 0; i < 2; i++ )
             {
-                this._vehicle.SoundHorn(300);
+                this._vehicle.SoundHorn( 300 );
                 this._vehicle.AreLightsOn = true;
-                Script.Wait(300);
+                Script.Wait( 300 );
                 this._vehicle.AreLightsOn = false;
-                Script.Wait(100);
+                Script.Wait( 100 );
             }
 
             this._isLocked = false;
 
-            if (!this._properties.IsEnableEngineOnUnlock)
+            if ( !this._properties.IsEnableEngineOnUnlock )
             {
                 this._vehicle.IsEngineRunning = false;
             }

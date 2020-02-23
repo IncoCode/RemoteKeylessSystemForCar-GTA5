@@ -51,5 +51,15 @@ namespace RemoteKeylessSystemForCar.Collection
         {
             return this._smartLocks.ContainsKey( vehicle.Handle );
         }
+
+        public void RemoveVehicle(Vehicle vehicle)
+        {
+            this._smartLocks.Remove( vehicle.Handle );
+        }
+
+        public VehicleSmartLock GetVehicleSmartLock(Vehicle vehicle)
+        {
+            return this._smartLocks[ vehicle.Handle ];
+        }
     }
 }

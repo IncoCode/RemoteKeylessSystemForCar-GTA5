@@ -23,7 +23,7 @@ namespace RemoteKeylessSystemForCar
         {
             this._menuController.Tick();
             this._smartLocks.Tick();
-            GTA.UI.Notification.Show( "Is trying to enter a locked vehicle " + Game.Player.Character.IsTryingToEnterALockedVehicle + ", Vehicle Handle " + Game.Player.Character.VehicleTryingToEnter?.Handle );
+            //GTA.UI.Notification.Show( "Is trying to enter a locked vehicle " + Game.Player.Character.IsTryingToEnterALockedVehicle + ", Vehicle Handle " + Game.Player.Character.VehicleTryingToEnter?.Handle );
         }
 
         private void RemoteKeylessSystem_KeyDown( object sender, KeyEventArgs e )
@@ -70,7 +70,7 @@ namespace RemoteKeylessSystemForCar
                     return;
                 }
 
-                this._smartLocks.AddVehicle( currentVehicle, new Model.VehicleSmartLockProperties() { IsEnableEngineOnUnlock = true } );
+                //this._smartLocks.AddVehicle( currentVehicle, new Model.VehicleSmartLockProperties() { IsEnableEngineOnUnlock = true } );
             }
 #endif
         }
