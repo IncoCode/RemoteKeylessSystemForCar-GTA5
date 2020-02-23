@@ -50,7 +50,7 @@ namespace RemoteKeylessSystemForCar.Controller
             var isCloseAllDorsOnLockItem = new UIMenuListItem( "Close All Doors On Lock", onOffItems, this.BoolToIndex( properties.IsCloseAllDorsOnLock ) );
             menu.AddItem( isCloseAllDorsOnLockItem );
 
-            var isCloseAllWindowsOnLockItem = new UIMenuListItem( "Close All Windows On Lock (NotImplemented)", onOffItems, this.BoolToIndex( properties.IsCloseAllWindowsOnLock ) );
+            var isCloseAllWindowsOnLockItem = new UIMenuListItem( "Close All Windows On Lock", onOffItems, this.BoolToIndex( properties.IsCloseAllWindowsOnLock ) );
             menu.AddItem( isCloseAllWindowsOnLockItem );
 
             var applyChangesItem = new UIMenuItem( "Apply Changes" );
