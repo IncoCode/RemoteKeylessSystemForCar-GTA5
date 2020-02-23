@@ -53,6 +53,14 @@ namespace RemoteKeylessSystemForCar.Model
             }
         }
 
+        private void PlaySound()
+        {
+            if ( this.Properties.PlaySoundOnLockUnlock )
+            {
+                this._vehicle.SoundHorn( 300 );
+            }
+        }
+
         public void Lock()
         {
             if ( this._isLocked )
@@ -73,7 +81,7 @@ namespace RemoteKeylessSystemForCar.Model
                 this.CloseAllWindows();
             }
 
-            this._vehicle.SoundHorn( 300 );
+            this.PlaySound();
             this._vehicle.AreLightsOn = true;
             Script.Wait( 300 );
             this._vehicle.AreLightsOn = false;
@@ -95,7 +103,7 @@ namespace RemoteKeylessSystemForCar.Model
 
             for ( int i = 0; i < 2; i++ )
             {
-                this._vehicle.SoundHorn( 300 );
+                this.PlaySound();
                 this._vehicle.AreLightsOn = true;
                 Script.Wait( 300 );
                 this._vehicle.AreLightsOn = false;

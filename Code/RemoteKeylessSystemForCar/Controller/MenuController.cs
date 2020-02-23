@@ -53,6 +53,9 @@ namespace RemoteKeylessSystemForCar.Controller
             var isCloseAllWindowsOnLockItem = new UIMenuListItem( "Close All Windows On Lock", onOffItems, this.BoolToIndex( properties.IsCloseAllWindowsOnLock ) );
             menu.AddItem( isCloseAllWindowsOnLockItem );
 
+            var playSoundOnLockUnlockItem = new UIMenuListItem( "Play Sound On Lock/Unlock", onOffItems, this.BoolToIndex( properties.PlaySoundOnLockUnlock ) );
+            menu.AddItem( playSoundOnLockUnlockItem );
+
             var applyChangesItem = new UIMenuItem( "Apply Changes" );
             applyChangesItem.Activated += ( UIMenu sender, UIMenuItem selectedItem ) =>
             {
@@ -60,6 +63,7 @@ namespace RemoteKeylessSystemForCar.Controller
                 properties.IsCloseAllDorsOnLock = this.OnOffToBool( isCloseAllDorsOnLockItem.Index );
                 properties.IsCloseAllWindowsOnLock = this.OnOffToBool( isCloseAllWindowsOnLockItem.Index );
                 properties.IsEnableEngineOnUnlock = this.OnOffToBool( isEnableEngineOnUnlockItem.Index );
+                properties.PlaySoundOnLockUnlock = this.OnOffToBool( playSoundOnLockUnlockItem.Index );
 
                 this._menuPool.CloseAllMenus();
             };
