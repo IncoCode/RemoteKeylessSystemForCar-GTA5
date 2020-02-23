@@ -89,6 +89,8 @@ namespace RemoteKeylessSystemForCar.Controller
             {
                 this._locksCollection.RemoveVehicle( vehicle );
                 GTA.UI.Notification.Show( "SmartLock uninstalled" );
+
+                this._menuPool.CloseAllMenus();
             };
 
             var smartLockPropertiesBtn = new UIMenuItem( "SmartLock Properties" );
