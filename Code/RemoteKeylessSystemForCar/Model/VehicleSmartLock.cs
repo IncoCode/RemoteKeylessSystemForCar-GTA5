@@ -87,6 +87,10 @@ namespace RemoteKeylessSystemForCar.Model
             {
                 this.CloseAllWindows();
             }
+            if ( this._properties.IsCloseRoofOnLock )
+            {
+                this._vehicle.RoofState = VehicleRoofState.Closing;
+            }
 
             this.PlaySound();
             this.BlinkLights();

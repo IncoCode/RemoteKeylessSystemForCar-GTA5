@@ -6,5 +6,6 @@
         public bool IsCloseAllDorsOnLock = true;
         public bool IsCloseAllWindowsOnLock = true;
         public bool PlaySoundOnLockUnlock = true;
+        public bool IsCloseRoofOnLock = true;
     }
 }
