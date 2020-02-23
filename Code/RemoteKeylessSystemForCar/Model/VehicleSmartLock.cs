@@ -47,7 +47,10 @@ namespace RemoteKeylessSystemForCar.Model
 
         private void CloseAllWindows()
         {
-            
+            foreach ( var window in Enum.GetValues( typeof( VehicleWindowIndex ) ).Cast<VehicleWindowIndex>() )
+            {
+                this._vehicle.Windows[ window ].RollUp();
+            }
         }
 
         public void Lock()
