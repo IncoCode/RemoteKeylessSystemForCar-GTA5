@@ -61,6 +61,13 @@ namespace RemoteKeylessSystemForCar.Model
             }
         }
 
+        private void BlinkLights()
+        {
+            this._vehicle.AreLightsOn = true;
+            Script.Wait( 300 );
+            this._vehicle.AreLightsOn = false;
+        }
+
         public void Lock()
         {
             if ( this._isLocked )
@@ -82,9 +89,7 @@ namespace RemoteKeylessSystemForCar.Model
             }
 
             this.PlaySound();
-            this._vehicle.AreLightsOn = true;
-            Script.Wait( 300 );
-            this._vehicle.AreLightsOn = false;
+            this.BlinkLights();
             this._vehicle.IsEngineRunning = false;
         }
 
@@ -104,9 +109,7 @@ namespace RemoteKeylessSystemForCar.Model
             for ( int i = 0; i < 2; i++ )
             {
                 this.PlaySound();
-                this._vehicle.AreLightsOn = true;
-                Script.Wait( 300 );
-                this._vehicle.AreLightsOn = false;
+                this.BlinkLights();
                 Script.Wait( 100 );
             }
 
