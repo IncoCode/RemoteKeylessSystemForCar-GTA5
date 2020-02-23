@@ -103,7 +103,9 @@ namespace RemoteKeylessSystemForCar.Model
             }
 
             this._isLocked = false;
+            bool isLightsOn = World.CurrentTimeOfDay.Hours >= 20 || World.CurrentTimeOfDay.Hours < 8;
 
+            this._vehicle.AreLightsOn = isLightsOn;
             if ( !this._properties.IsEnableEngineOnUnlock )
             {
                 this._vehicle.IsEngineRunning = false;
