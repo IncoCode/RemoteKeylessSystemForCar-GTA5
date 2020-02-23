@@ -2,6 +2,7 @@
 using RemoteKeylessSystemForCar.Collection;
 using RemoteKeylessSystemForCar.Controller;
 using System;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace RemoteKeylessSystemForCar
@@ -15,8 +16,14 @@ namespace RemoteKeylessSystemForCar
         {
             this.Tick += this.RemoteKeylessSystem_Tick;
             this.KeyDown += this.RemoteKeylessSystem_KeyDown;
+            this.Aborted += this.RemoteKeylessSystem_Aborted;
 
             this._menuController = new MenuController( this._smartLocks );
+        }
+
+        private void RemoteKeylessSystem_Aborted( object sender, EventArgs e )
+        {
+            this._smartLocks.Destroy();
         }
 
         private void RemoteKeylessSystem_Tick( object sender, EventArgs e )
@@ -68,6 +75,11 @@ namespace RemoteKeylessSystemForCar
                 if ( currentVehicle == null )
                 {
                     return;
+                }
+
+                foreach ( var window in Enum.GetValues( typeof( VehicleWindowIndex ) ).Cast<VehicleWindowIndex>() )
+                {
+                    currentVehicle.Windows[ window ].RollDown();
                 }
 
                 //this._smartLocks.AddVehicle( currentVehicle, new Model.VehicleSmartLockProperties() { IsEnableEngineOnUnlock = true } );

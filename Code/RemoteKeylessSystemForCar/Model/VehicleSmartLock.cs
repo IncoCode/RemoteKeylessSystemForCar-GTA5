@@ -80,7 +80,7 @@ namespace RemoteKeylessSystemForCar.Model
             this._vehicle.IsEngineRunning = false;
         }
 
-        public void Unlock()
+        public void Unlock( bool force = false )
         {
             if ( !this._isLocked )
             {
@@ -88,6 +88,11 @@ namespace RemoteKeylessSystemForCar.Model
             }
 
             this._vehicle.LockStatus = VehicleLockStatus.Unlocked;
+            if ( force )
+            {
+                return;
+            }
+
             for ( int i = 0; i < 2; i++ )
             {
                 this._vehicle.SoundHorn( 300 );

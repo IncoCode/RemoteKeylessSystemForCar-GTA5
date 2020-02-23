@@ -8,6 +8,7 @@ namespace RemoteKeylessSystemForCar.Collection
     internal class SmartLocksCollection
     {
         private readonly Dictionary<int, VehicleSmartLock> _smartLocks;
+        private volatile bool _isDestroying = false;
 
         public SmartLocksCollection()
         {
@@ -16,6 +17,11 @@ namespace RemoteKeylessSystemForCar.Collection
 
         public void Tick()
         {
+            if ( this._isDestroying )
+            {
+                return;
+            }
+
             foreach ( KeyValuePair<int, VehicleSmartLock> kvp in this._smartLocks.ToList() )
             {
                 var vehicle = Entity.FromHandle( kvp.Key ) as Vehicle;
@@ -42,24 +48,35 @@ namespace RemoteKeylessSystemForCar.Collection
             }
         }
 
-        public void AddVehicle(Vehicle vehicle, VehicleSmartLockProperties properties)
+        public void AddVehicle( Vehicle vehicle, VehicleSmartLockProperties properties )
         {
             this._smartLocks.Add( vehicle.Handle, new VehicleSmartLock( vehicle, properties ) );
         }
 
-        public bool IsInstalled(Vehicle vehicle)
+        public bool IsInstalled( Vehicle vehicle )
         {
             return this._smartLocks.ContainsKey( vehicle.Handle );
         }
 
-        public void RemoveVehicle(Vehicle vehicle)
+        public void RemoveVehicle( Vehicle vehicle )
         {
             this._smartLocks.Remove( vehicle.Handle );
         }
 
-        public VehicleSmartLock GetVehicleSmartLock(Vehicle vehicle)
+        public VehicleSmartLock GetVehicleSmartLock( Vehicle vehicle )
         {
             return this._smartLocks[ vehicle.Handle ];
+        }
+
+        public void Destroy()
+        {
+            this._isDestroying = true;
+
+            foreach ( var kvp in this._smartLocks )
+            {
+                kvp.Value.Unlock( true );
+                this._smartLocks.Remove( kvp.Key );
+            }
         }
     }
 }
