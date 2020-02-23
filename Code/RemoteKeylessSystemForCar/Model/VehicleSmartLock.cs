@@ -42,18 +42,19 @@ namespace RemoteKeylessSystemForCar.Model
 
         private void CloseAllDoors()
         {
-            foreach (VehicleDoor door in Enum.GetValues(typeof(VehicleDoor)))
+            foreach ( VehicleDoor door in this._vehicle.Doors)
             {
-                this._vehicle.CloseDoor(door, false);
+                door.Close();
             }
         }
 
         private void CloseAllWindows()
         {
-            foreach (VehicleWindow window in Enum.GetValues(typeof(VehicleWindow)))
-            {
-                this._vehicle.RollUpWindow(window);
-            }
+            // ToDo: implement
+            //foreach (VehicleWindow window in this._vehicle.Windows )
+            //{
+            //    this._vehicle.RollUpWindow(window);
+            //}
         }
 
         public void Lock()
@@ -77,10 +78,10 @@ namespace RemoteKeylessSystemForCar.Model
             }
 
             this._vehicle.SoundHorn(300);
-            this._vehicle.LightsOn = true;
+            this._vehicle.AreLightsOn = true;
             Script.Wait(300);
-            this._vehicle.LightsOn = false;
-            this._vehicle.EngineRunning = false;
+            this._vehicle.AreLightsOn = false;
+            this._vehicle.IsEngineRunning = false;
         }
 
         public void Unlock()
@@ -94,9 +95,9 @@ namespace RemoteKeylessSystemForCar.Model
             for (int i = 0; i < 2; i++)
             {
                 this._vehicle.SoundHorn(300);
-                this._vehicle.LightsOn = true;
+                this._vehicle.AreLightsOn = true;
                 Script.Wait(300);
-                this._vehicle.LightsOn = false;
+                this._vehicle.AreLightsOn = false;
                 Script.Wait(100);
             }
 
@@ -104,7 +105,7 @@ namespace RemoteKeylessSystemForCar.Model
 
             if (!this._properties.IsEnableEngineOnUnlock)
             {
-                this._vehicle.EngineRunning = false;
+                this._vehicle.IsEngineRunning = false;
             }
         }
     }

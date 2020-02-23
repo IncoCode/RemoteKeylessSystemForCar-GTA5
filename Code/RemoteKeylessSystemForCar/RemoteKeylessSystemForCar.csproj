@@ -9,7 +9,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RemoteKeylessSystemForCar</RootNamespace>
     <AssemblyName>RemoteKeylessSystemForCar</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -68,8 +68,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Collection\SmartLocksCollection.cs" />
     <Compile Include="Controller\MenuController.cs" />
-    <Compile Include="Controller\VehicleSmartLockController.cs" />
     <Compile Include="Model\VehicleSmartLock.cs" />
     <Compile Include="Model\VehicleSmartLockProperties.cs" />
     <Compile Include="RemoteKeylessSystem.cs" />
