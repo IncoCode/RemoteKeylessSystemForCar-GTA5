@@ -9,6 +9,7 @@ namespace RemoteKeylessSystemForCar.Collection
     {
         private readonly Dictionary<int, VehicleSmartLock> _smartLocks;
         private volatile bool _isDestroying = false;
+        private readonly int _maxSize = 20;
 
         public SmartLocksCollection()
         {
@@ -50,6 +51,11 @@ namespace RemoteKeylessSystemForCar.Collection
 
         public void AddVehicle( Vehicle vehicle, VehicleSmartLockProperties properties )
         {
+            if ( this._smartLocks.Count >= this._maxSize )
+            {
+                throw new System.Exception( "Maximum capacity has reached" );
+            }
+
             this._smartLocks.Add( vehicle.Handle, new VehicleSmartLock( vehicle, properties ) );
         }
 
